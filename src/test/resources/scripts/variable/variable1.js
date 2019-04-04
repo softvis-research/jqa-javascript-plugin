@@ -1,0 +1,7 @@
+/*
+    Expecting three instances of numbers
+ */
+
+var x = 5;
+var y = 6;
+var z = x + y;

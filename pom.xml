@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jqassistant.contrib.common</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.6.0</version>
+	</parent>
+
+	<groupId>org.jqassistant.contrib.plugin</groupId>
+	<artifactId>jqassistant-ecmascript-plugin</artifactId>
+	<version>0.0.1</version>
+
+	<name>jQAssistant ECMA Script Source Plugin</name>
+	<description>The jQAssistant plugin to scan and to analyze ECMA script source code.</description>
+	<url>http://jqassistant.org/</url>
+
+	<developers>
+		<developer>
+			<id>sebastian-hoefer</id>
+			<name>Sebastian Hoefer</name>
+			<email>sh20xyqi@studserv.uni-leipzig.de</email>
+		</developer>
+		<developer>
+			<id>dirk-mahler</id>
+			<name>Dirk Mahler</name>
+			<email>dirk.mahler@buschmais.com</email>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License, v3</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+		</license>
+	</licenses>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<com.buschmais.xo.version>0.9.0</com.buschmais.xo.version>
+		<org.neo4j.version>3.3.4</org.neo4j.version>
+		<org.slf4j.version>1.7.12</org.slf4j.version>
+		<org.hamcrest.version>2.0.0.0</org.hamcrest.version>
+		<antlr.version>4.7</antlr.version>
+		<generated.sources>target/generated-sources</generated.sources>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr.version}</version>
+				<configuration>
+					<visitor>true</visitor>
+					<listener>true</listener>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${generated.sources}/antlr4</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencyManagement>
+
+		<dependencies>
+			<!-- jQAssistant -->
+			<!-- unit tests -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>1.10.19</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.plugin</groupId>
+			<artifactId>common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>shared</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>scanner</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>report</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>plugin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.plugin</groupId>
+			<artifactId>common</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>store</artifactId>
+			<type>test-jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.core</groupId>
+			<artifactId>analysis</artifactId>
+			<type>test-jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.xo</groupId>
+			<artifactId>xo.neo4j.embedded</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.buschmais.jqassistant.neo4jserver</groupId>
+			<artifactId>neo4jv3</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>java-hamcrest</artifactId>
+			<version>${org.hamcrest.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-symbol-solver-core</artifactId>
+			<version>3.6.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>${antlr.version}</version>
+		</dependency>
+
+		<!-- Declared to detect ambiguities between data models of bytecode and 
+			src parser -->
+		<dependency>
+			<groupId>com.buschmais.jqassistant.plugin</groupId>
+			<artifactId>java</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+</project>
