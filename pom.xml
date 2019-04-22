@@ -10,11 +10,11 @@
 	</parent>
 
 	<groupId>org.jqassistant.contrib.plugin</groupId>
-	<artifactId>jqassistant-ecmascript-plugin</artifactId>
+	<artifactId>jqassistant-javascript-plugin</artifactId>
 	<version>0.0.1</version>
 
-	<name>jQAssistant ECMA Script Source Plugin</name>
-	<description>The jQAssistant plugin to scan and to analyze ECMA script source code.</description>
+	<name>jQAssistant Javascript Source Plugin</name>
+	<description>The jQAssistant plugin to scan and to analyze Javascript source code.</description>
 	<url>http://jqassistant.org/</url>
 
 	<developers>

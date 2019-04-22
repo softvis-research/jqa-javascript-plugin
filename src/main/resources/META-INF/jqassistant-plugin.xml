@@ -1,30 +1,31 @@
 <jqa-plugin:jqassistant-plugin
-        xmlns:jqa-plugin="http://www.buschmais.com/jqassistant/core/plugin/schema/v1.0" name="ECMA">
-<description>Provides a scanner for ECMA script files.</description>
+        xmlns:jqa-plugin="http://www.buschmais.com/jqassistant/core/plugin/schema/v1.0" name="JS">
+<description>Provides a scanner for Javascript files.</description>
     <model>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptFileDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptVariableDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptFunctionDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptFunctionParameterDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptObjectDescriptor</class>
+    	<class>org.jqassistant.contrib.plugin.javascript.api.model.JsDescriptor</class>
+    
+    	<class>org.jqassistant.contrib.plugin.javascript.api.model.ArrayDescriptor</class>
+		<class>org.jqassistant.contrib.plugin.javascript.api.model.ObjectDescriptor</class>
+    	<class>org.jqassistant.contrib.plugin.javascript.api.model.ObjectDeclares</class>
+		<class>org.jqassistant.contrib.plugin.javascript.api.model.ArrayDeclares</class>
+    
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.FunctionDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.FunctionParameterDescriptor</class>
 
-		<class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptArrayDescriptor</class>
-		<class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptObjectDescriptor</class>
 		
-		<class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScripArrayDeclares</class>
-		<class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScripObjectDeclares</class> 
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.LiteralDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.NullDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.StringDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.NumberDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.BooleanDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.UndefinedDescriptor</class>
 
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptLiteralDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptNullDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptStringDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptNumberDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptBooleanDescriptor</class>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptUndefinedDescriptor</class>
-
-		<class>org.jqassistant.contrib.plugin.ecmascript.api.model.ECMAScriptClassDescriptor</class>
+		<class>org.jqassistant.contrib.plugin.javascript.api.model.ClassDescriptor</class>
 
     </model>
     <scanner>
-        <class>org.jqassistant.contrib.plugin.ecmascript.api.scanner.ECMAScriptFileScannerPlugin</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.scanner.JsFileScannerPlugin</class>
     </scanner>
 </jqa-plugin:jqassistant-plugin>
