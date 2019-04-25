@@ -15,6 +15,12 @@ import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 
+/**
+ * Manipulator for the {@link LiteralDescriptor} to prepare the interaction with the store for this type of descriptor.
+ * 
+ * @author sh20xyqi
+ */
+
 public class LiteralStoreManipulator implements NodeStoreManipulator<LiteralDescriptor<?>, LiteralContext> {
 
 	@Override

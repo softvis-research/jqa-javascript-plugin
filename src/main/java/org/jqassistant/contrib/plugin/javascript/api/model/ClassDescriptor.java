@@ -4,14 +4,15 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
 /**
- * ECMAScript Class Descriptor
+ * Interface for describing a class.
+ * 
  * @author sh20xyqi
  */
 @Label(value = "Class", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
 public interface ClassDescriptor extends JsDescriptor, CodeArtifact, FullQualifiedNameDescriptor {
     
 	/**
-     * Returns the name of the class
+     * Returns the name of the class.
      * @return String 
      */
 	@Property("NAME")
@@ -19,7 +20,7 @@ public interface ClassDescriptor extends JsDescriptor, CodeArtifact, FullQualifi
     void setName(String name);
     
     /**
-     * Returns the super class of the class
+     * Returns the super class of the class.
      * @return String
      */
     @Property("EXTENDS")

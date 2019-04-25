@@ -6,10 +6,11 @@ import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescripto
 import com.buschmais.xo.neo4j.api.annotation.Label;
 
 /**
- * ECMAScript Object Baseclass
+ * Interface for the description of data structures, which can be either an {@link ObjectDescriptor} or an {@kink ArrayDescriptor}.
+ * 
  * @author sh20xyqi
  */
-@Label(value = "ObjectType", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
+@Label(value ="", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
 public interface BaseObjectDescriptor extends CodeArtifact, FullQualifiedNameDescriptor {
 
 	public static final AtomicInteger count = new AtomicInteger(0);

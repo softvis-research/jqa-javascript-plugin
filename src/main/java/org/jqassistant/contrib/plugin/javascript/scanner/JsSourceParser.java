@@ -17,18 +17,17 @@ import org.jqassistant.contrib.plugin.javascript.JavaScriptLexer;
 import org.jqassistant.contrib.plugin.javascript.JavaScriptParser;
 import org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.JavascriptVisitor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResource;
 
 /**
- *
- * @author 
+ * Class that contains the logic for processing JavaScript source code artifacts.
+ * 
+ * @author sh20xyqi
+ * 
  */
 public class JsSourceParser {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsSourceParser.class);
     private final Store store;
 
     public JsSourceParser(final Store store) {
@@ -36,8 +35,8 @@ public class JsSourceParser {
     }
 
     /**
-     * parse js file
-     * @param item 
+     * Function that runs through the individual processing steps of the plugin.
+     * @param item The passed file.
      * @throws IOException 
      */
     public JsFileDescriptor parseFile(final FileResource item) throws IOException {

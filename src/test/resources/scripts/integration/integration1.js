@@ -11,6 +11,8 @@ function fibonacci(num){
     return b;
 }
 
+var a = { "a" : 234}
+
 const sieve = max => {
     // Make array of length max and fill with true
     const sieve = new Array(max).fill(true)

@@ -25,8 +25,8 @@ import com.buschmais.jqassistant.plugin.common.api.scanner.AbstractScannerPlugin
 import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResource;
 
 /**
- * JS file scanner
- * @author 
+ * JS file Scanner
+ * @author sh20xyqi
  */
 @ScannerPlugin.Requires(FileDescriptor.class)
 public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsFileDescriptor> {
@@ -38,11 +38,11 @@ public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsF
     private static List<String> suffixes = asList("js");
 
     /**
-     * check if file accepted by this plugin
-     * @param item
-     * @param path
-     * @param scope
-     * @return boolean
+     * Routine to check whether the passed file can be processed by the plugin.
+     * @param item The passed file.
+     * @param path The absolute path to the file.
+     * @param scope The passed lexical scope of the passed file.
+     * @return boolean State whether the passed file would be accepted by the plugin.
      * @throws IOException 
      */
     @Override
@@ -53,7 +53,7 @@ public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsF
 
             boolean accepted = suffixes.contains(suffix);
             if(accepted) {
-                LOGGER.info("ECMA accepted path "+path);
+                LOGGER.info("JS accepted path " + path);
             }
 
             return accepted;
@@ -63,12 +63,12 @@ public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsF
     }
 
     /**
-     * scan js file
-     * @param item
-     * @param path
-     * @param scope
-     * @param scanner
-     * @return jsFileDescriptor
+     * Function that calls the Visitor to scan the transferred, checked file.
+     * @param item The passed file.
+     * @param path The absolkute path to the file.
+     * @param scope The passed lexical scope of the passed file.
+     * @param scanner The passed scanner which shall be used to scan the file.
+     * @return jsFileDescriptor The used file descriptor.
      * @throws IOException 
      */
     @Override

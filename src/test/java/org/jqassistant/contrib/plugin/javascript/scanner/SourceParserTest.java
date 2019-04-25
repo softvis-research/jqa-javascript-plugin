@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.jqassistant.contrib.plugin.javascript.api.model.ArrayDeclares;
-import org.jqassistant.contrib.plugin.javascript.api.model.ObjectDeclares;
+import org.jqassistant.contrib.plugin.javascript.api.model.ArrayDeclaresRelationshipDescriptor;
+import org.jqassistant.contrib.plugin.javascript.api.model.ObjectDeclaresRelationshipDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.ArrayDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.CodeArtifact;
 import org.jqassistant.contrib.plugin.javascript.api.model.BooleanDescriptor;
@@ -310,8 +310,8 @@ public class SourceParserTest {
 		addMockToStore(UndefinedDescriptor.class, mocks, mockedStore);
 		addMockToStore(NullDescriptor.class, mocks, mockedStore);
 
-		when(mockedStore.create(any(ArrayDescriptor.class), eq(ArrayDeclares.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ArrayDeclares.class));
-		when(mockedStore.create(any(ObjectDescriptor.class), eq(ObjectDeclares.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ObjectDeclares.class));
+		when(mockedStore.create(any(ArrayDescriptor.class), eq(ArrayDeclaresRelationshipDescriptor.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ArrayDeclaresRelationshipDescriptor.class));
+		when(mockedStore.create(any(ObjectDescriptor.class), eq(ObjectDeclaresRelationshipDescriptor.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ObjectDeclaresRelationshipDescriptor.class));
 	
 		// lets run the parser
 		JsSourceParser testable = new JsSourceParser(mockedStore);

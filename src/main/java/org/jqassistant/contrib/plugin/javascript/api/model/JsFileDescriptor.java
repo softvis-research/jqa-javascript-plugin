@@ -5,8 +5,12 @@ import com.buschmais.jqassistant.plugin.common.api.model.NamedDescriptor;
 import com.buschmais.xo.neo4j.api.annotation.Label;
 
 /**
- * ECMAScript file descriptor
+ * Interface to describe a file as a JavaScript file.
+ * 
  * @author sh20xyqi
  */
-@Label("JS_Source")
-public interface JsFileDescriptor extends CodeArtifact, JsDescriptor, NamedDescriptor, FileDescriptor {}
+
+@Label("JS")
+public interface JsFileDescriptor extends CodeArtifact, JsDescriptor, NamedDescriptor, FileDescriptor {
+	
+}

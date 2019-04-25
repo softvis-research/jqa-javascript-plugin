@@ -5,14 +5,15 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
 /**
- * ECMAScript Variable Descriptor
+ * Interface for describing a named or unnamed variable that carries a {@link LiteralDescriptor} or a {@link BaseObjectDescriptor}.
+ * 
  * @author sh20xyqi
  */
 @Label(value = "Variable", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
 public interface VariableDescriptor extends JsDescriptor, FullQualifiedNameDescriptor, CodeArtifact {
     
 	/**
-     * Returns the name of the variable
+     * Returns the name of the variable.
      * @return String 
      */
 	@Property("name")

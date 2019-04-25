@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
 import com.buschmais.xo.neo4j.api.annotation.Label;
-import com.buschmais.xo.neo4j.api.annotation.Relation.Outgoing;
 
 /**
- * ECMAScript Object Baseclass
+ * Interface used to describe the special type of a {@link BaseObjectDescriptor} called array.
+ * 
  * @author sh20xyqi
  */
 @Label(value = "Array", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
@@ -19,8 +19,11 @@ public interface ArrayDescriptor extends BaseObjectDescriptor {
 	default String getFullQualifiedName() {
 		return ARRAY;
 	}
-	
-	@Outgoing
-	List<ArrayDeclares> getArrayDeclares();
+	/**
+     * Returns all index {@link ArrayDeclaresRelationshipDescriptor} of this array.
+     *
+     * @return The elements of the array.
+     */
+	List<ArrayDeclaresRelationshipDescriptor> getArrayDeclares();
 }
 

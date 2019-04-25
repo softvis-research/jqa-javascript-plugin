@@ -1,10 +1,17 @@
 package org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators;
 
 import org.jqassistant.contrib.plugin.javascript.JavaScriptParser.VariableDeclarationContext;
+import org.jqassistant.contrib.plugin.javascript.api.model.FunctionDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
 
 import com.buschmais.jqassistant.core.store.api.Store;
+
+/**
+ * Manipulator for the {@link VariableDescriptor} to prepare the interaction with the store for this type of descriptor.
+ * 
+ * @author sh20xyqi
+ */
 
 public class VariableStoreManipulator implements NodeStoreManipulator<VariableDescriptor, VariableDeclarationContext> {
 

@@ -7,20 +7,21 @@ import com.buschmais.xo.neo4j.api.annotation.Relation.Incoming;
 import com.buschmais.xo.neo4j.api.annotation.Relation.Outgoing;
 
 /**
- * Object Declares
+ * Interface that describes the relations of an {@link ArrayDescriptor} to its indexed values. 
+ * 
  * @author sh20xyqi
  */
-@Relation("DECLARES_OBJECT")
-public interface ObjectDeclares extends Descriptor {
+@Relation("DECLARES_ARRAY")
+public interface ArrayDeclaresRelationshipDescriptor extends Descriptor {
 
 	@Outgoing
-	ObjectDescriptor getObjectDescriptor();
+	ArrayDescriptor getArrayDescriptor();
 	
 	@Incoming
 	JsDescriptor getJsDescriptor();
 	
-	@Property(value = "key")
-	String getKey();
-	void setKey(String key);
+	@Property(value = "index")
+	int getIndex();
+	void setIndex(int index);
 }
 

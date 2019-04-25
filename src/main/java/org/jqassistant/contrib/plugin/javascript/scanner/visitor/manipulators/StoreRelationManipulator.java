@@ -6,6 +6,12 @@ import com.buschmais.jqassistant.core.store.api.Store;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
 import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
 
+/**
+ * Manipulator for all possible relationships to prepare the interaction with the store for this type of descriptor. Serves as a super class for all other manipulators.
+ * 
+ * @author sh20xyqi
+ */
+
 public abstract class StoreRelationManipulator <T extends Descriptor> {
 
 	protected Store store;

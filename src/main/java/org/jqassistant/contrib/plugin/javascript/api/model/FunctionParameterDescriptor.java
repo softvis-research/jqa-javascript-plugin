@@ -5,14 +5,15 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
 /**
- * Function Parameters
+ * Interface for describing all passed parameters of a function.
+ * 
  * @author sh20xyqi
  */
 @Label(value = "Parameter", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
 public interface FunctionParameterDescriptor extends VariableDescriptor {
     
 	/**
-     * Returns the index of the parameter
+     * Returns the index of the parameter.
      * @return String 
      */
 	@Property("index")

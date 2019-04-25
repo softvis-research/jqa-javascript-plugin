@@ -4,8 +4,20 @@ import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescripto
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
+/**
+ * Interface for describing a literal, also known as a primitive data type.
+ * 
+ * @author sh20xyqi
+ */
+
 @Label(value = "Literal")
 public interface LiteralDescriptor <T> extends JsDescriptor, FullQualifiedNameDescriptor, LineNumberDescriptor {
+	
+	/**
+	 * A literal can have a single value which is assigned to it.
+	 * 
+	 * @return Returns the value of the literal.
+	 */
 	
 	@Property("value")
 	T getValue();

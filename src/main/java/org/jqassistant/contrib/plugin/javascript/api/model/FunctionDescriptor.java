@@ -7,14 +7,15 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import java.util.List;
 
 /**
- * ECMAScript function
+ * Interface to describe a named or anonymous function.
+ * 
  * @author sh20xyqi
  */
 @Label(value = "Function", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
 public interface FunctionDescriptor extends JsDescriptor, FullQualifiedNameDescriptor, CodeArtifact {
     
 	/**
-     * Return the name of a function.
+     * Returns the name of the function.
      *
      * @return The name.
      */
@@ -23,7 +24,7 @@ public interface FunctionDescriptor extends JsDescriptor, FullQualifiedNameDescr
     void setName(String name);
     
     /**
-     * Return all declared parameters of this function.
+     * Returns all declared {@link FunctionParameterDescriptor} of this function.
      *
      * @return The declared parameters.
      */
