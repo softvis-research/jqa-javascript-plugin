@@ -27,17 +27,14 @@ import org.jqassistant.contrib.plugin.javascript.api.model.LiteralDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.ObjectDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.UndefinedDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ArrayDeclaresManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ArrayStoreManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ClassStoreManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.FunctionStoreManipulator;
+import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.InvokesManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.LiteralStoreManipulator;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ObjectDeclaresManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ObjectStoreManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.ParameterStoreManipulator;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.StoreRelationManipulator;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators.VariableStoreManipulator;
-import org.jruby.ext.ffi.FFIService;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 
@@ -52,19 +49,13 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 	private String fqnBase;
 	private FqnCreator fqnCreator;
 	private CodeArtifact rootComp;
-	private Optional<StoreRelationManipulator<?>> relationCreator;
 
 	public JavascriptVisitor(Store store, String fqnBase, CodeArtifact basicComp) {
-		this(store, fqnBase, basicComp, null);
-	}
-
-	public JavascriptVisitor(Store store, String fqnBase, CodeArtifact basicComp, StoreRelationManipulator<?> relationCreator) {
 		super();
 		System.out.println("FQN: " + fqnBase);
 		this.store = store;
 		this.fqnBase = fqnBase;
 		this.rootComp = basicComp;
-		this.relationCreator = Optional.ofNullable(relationCreator);
 		this.fqnCreator = new FqnCreator(fqnBase);
 	}
 
@@ -93,7 +84,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 	public Void visitFunctionExpression(FunctionExpressionContext ctx) {
 		FunctionDescriptor ecmaFunc = new FunctionStoreManipulator().createNodeIn(store, ctx, fqnCreator);
 		rootComp.getFunctions().add(ecmaFunc);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaFunc));
 		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, createFqn(ecmaFunc.getName()), ecmaFunc);
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
@@ -103,7 +93,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 	public Void visitArrowFunctionExpression(ArrowFunctionExpressionContext ctx) {
 		FunctionDescriptor ecmaFunc = new FunctionStoreManipulator().createNodeIn(store, ctx, fqnCreator);
 		rootComp.getFunctions().add(ecmaFunc);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaFunc));
 		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, createFqn(ecmaFunc.getName()), ecmaFunc);
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
@@ -115,7 +104,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 		FunctionDescriptor ecmaFunc = new FunctionStoreManipulator(funcName).createNodeIn(store, ctx, fqnCreator);
 		rootComp.getFunctions().add(ecmaFunc);
 		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, createFqn(funcName), ecmaFunc);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaFunc));
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
 	}
@@ -127,7 +115,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 		FunctionDescriptor ecmaFunc = new FunctionStoreManipulator(funcName).createNodeIn(store, ctx, fqnCreator);
 		rootComp.getFunctions().add(ecmaFunc);
 		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, createFqn(funcName), ecmaFunc);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaFunc));
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
 	}
@@ -154,8 +141,7 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 			rootComp.getLiterals().add(d);
 			d.setLine(ctx.getStart().getLine());
 			d.setFullQualifiedName(createFqn(Integer.toString(d.hashCode())));
-			// set relation
-			return relationCreator.map((a) -> a.createRelation(ctx, rootComp, d));
+			return d;
 		});
 
 		return super.visitLiteral(ctx);
@@ -164,8 +150,7 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 	@Override
 	public Void visitObjectLiteral(ObjectLiteralContext ctx) {
 		ObjectDescriptor ecmaObj = new ObjectStoreManipulator().createNodeIn(store, ctx, fqnCreator);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaObj));
-		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store,  fqnCreator.createFqn(ObjectDescriptor.OBJECT), ecmaObj, new ObjectDeclaresManipulator(store));
+		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store,  fqnCreator.createFqn(ObjectDescriptor.OBJECT), ecmaObj);
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
 	}
@@ -173,10 +158,9 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 	@Override
 	public Void visitArrayLiteralExpression(ArrayLiteralExpressionContext ctx) {
 		ArrayDescriptor ecmaArray = new ArrayStoreManipulator().createNodeIn(store, ctx, fqnCreator);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaArray));
 		rootComp.getObjects().add(ecmaArray);
 
-		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, fqnCreator.createFqn(ArrayDescriptor.ARRAY), ecmaArray, new ArrayDeclaresManipulator(store));
+		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, fqnCreator.createFqn(ArrayDescriptor.ARRAY), ecmaArray);
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
 	}
@@ -186,7 +170,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 		ClassDescriptor ecmaClass = new ClassStoreManipulator().createNodeIn(store, ctx, fqnCreator);
 		rootComp.getClasses().add(ecmaClass);
 		JavascriptVisitor subTreeVistor = new JavascriptVisitor(store, fqnCreator.createFqn(ecmaClass.getName()), ecmaClass);
-		relationCreator.map((a) -> a.createRelation(ctx, rootComp, ecmaClass));
 		ctx.children.forEach((c) -> c.accept(subTreeVistor));
 		return VISITOR_DOES_NOT_GO_DEEPER_INTO_AST;
 	}
@@ -228,8 +211,7 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 						fd.setName(funcName);
 						return fd;
 					});
-					rootComp.getInvokes().add(func);
-					System.out.println(funcName);
+					new InvokesManipulator(store).createRelation(ctx, rootComp, func);
 			}
 		}
 	
@@ -244,8 +226,6 @@ public class JavascriptVisitor extends JavaScriptParserBaseVisitor<Void> {
 				  .map((String s) ->  Optional.ofNullable(store.find(FunctionDescriptor.class, s)))
 				  .filter((Optional<FunctionDescriptor> curFd) -> curFd.isPresent())
 				  .findFirst().orElse(Optional.empty());
-				 
-		
 	}
 	
 

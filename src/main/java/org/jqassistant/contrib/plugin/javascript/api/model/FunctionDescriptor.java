@@ -4,6 +4,8 @@ import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescripto
 import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
+import com.buschmais.xo.neo4j.api.annotation.Relation.Incoming;
+
 import java.util.List;
 
 /**
@@ -30,5 +32,7 @@ public interface FunctionDescriptor extends JsDescriptor, FullQualifiedNameDescr
      */
     @Relation("HAS")
     List<FunctionParameterDescriptor> getParameters();
-    
+ 
+    @Incoming
+    List<InvokesDescriptor> getInvokedBy();
 }

@@ -3,7 +3,9 @@ package org.jqassistant.contrib.plugin.javascript.api.model;
 import java.util.List;
 
 import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
+import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
+import com.buschmais.xo.neo4j.api.annotation.Relation.Outgoing;
 
 /**
  * Interface to describe a JavaScript code artifact.
@@ -11,23 +13,20 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
  * @author sh20xyqi
  */
 
+@Label("JavaScriptCode")
 public interface CodeArtifact extends FullQualifiedNameDescriptor, LineNumberDescriptor {
 
 	public static final String DECLARES = "DECLARES";
 
+	@Outgoing
+	List<InvokesDescriptor> getInvokes();
+	
 	/**
      * Contains all named and anonymous {@link FunctionDescriptor} that occur in this code artifact.
      * @return List of functions
      */
     @Relation(DECLARES)
     List<FunctionDescriptor> getFunctions();
-    
-	/**
-     * Contains all functions that were called by another {@link FunctionDescriptor}.
-     * @return List of invoked functions 
-     */
-    @Relation("INVOKES")
-    List<FunctionDescriptor> getInvokes();
     
     /**
      * Contains all named and anonymous {@link ClassDescriptor} that occur in this JavaScript code artifact.

@@ -1,7 +1,5 @@
 package org.jqassistant.contrib.plugin.javascript.api.model;
 
-import java.util.List;
-
 import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
 import com.buschmais.xo.neo4j.api.annotation.Label;
 
@@ -19,11 +17,5 @@ public interface ArrayDescriptor extends BaseObjectDescriptor {
 	default String getFullQualifiedName() {
 		return ARRAY;
 	}
-	/**
-     * Returns all index {@link ArrayDeclaresRelationshipDescriptor} of this array.
-     *
-     * @return The elements of the array.
-     */
-	List<ArrayDeclaresRelationshipDescriptor> getArrayDeclares();
 }
 

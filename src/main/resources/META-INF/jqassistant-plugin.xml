@@ -4,10 +4,10 @@
     <model>
     	<class>org.jqassistant.contrib.plugin.javascript.api.model.JsDescriptor</class>
     
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.CodeArtifact</class>
     	<class>org.jqassistant.contrib.plugin.javascript.api.model.ArrayDescriptor</class>
 		<class>org.jqassistant.contrib.plugin.javascript.api.model.ObjectDescriptor</class>
-    	<class>org.jqassistant.contrib.plugin.javascript.api.model.ObjectDeclaresRelationshipDescriptor</class>
-		<class>org.jqassistant.contrib.plugin.javascript.api.model.ArrayDeclaresRelationshipDescriptor</class>
+    	<class>org.jqassistant.contrib.plugin.javascript.api.model.InvokesDescriptor</class>
     
         <class>org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor</class>

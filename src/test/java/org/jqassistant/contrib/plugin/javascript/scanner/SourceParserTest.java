@@ -9,8 +9,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,22 +22,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import org.jqassistant.contrib.plugin.javascript.api.model.ArrayDeclaresRelationshipDescriptor;
-import org.jqassistant.contrib.plugin.javascript.api.model.ObjectDeclaresRelationshipDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.ArrayDescriptor;
-import org.jqassistant.contrib.plugin.javascript.api.model.CodeArtifact;
 import org.jqassistant.contrib.plugin.javascript.api.model.BooleanDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.ClassDescriptor;
-import org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor;
+import org.jqassistant.contrib.plugin.javascript.api.model.CodeArtifact;
 import org.jqassistant.contrib.plugin.javascript.api.model.FunctionDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.FunctionParameterDescriptor;
+import org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.NullDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.NumberDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.ObjectDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.StringDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.UndefinedDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.JsSourceParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -49,7 +44,6 @@ import org.mockito.stubbing.Answer;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 import com.buschmais.jqassistant.core.store.api.model.Descriptor;
-import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
 
 @RunWith(Parameterized.class)
 public class SourceParserTest {
@@ -310,8 +304,6 @@ public class SourceParserTest {
 		addMockToStore(UndefinedDescriptor.class, mocks, mockedStore);
 		addMockToStore(NullDescriptor.class, mocks, mockedStore);
 
-		when(mockedStore.create(any(ArrayDescriptor.class), eq(ArrayDeclaresRelationshipDescriptor.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ArrayDeclaresRelationshipDescriptor.class));
-		when(mockedStore.create(any(ObjectDescriptor.class), eq(ObjectDeclaresRelationshipDescriptor.class), any(FullQualifiedNameDescriptor.class))).thenReturn(mock(ObjectDeclaresRelationshipDescriptor.class));
 	
 		// lets run the parser
 		JsSourceParser testable = new JsSourceParser(mockedStore);
