@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
+import org.jqassistant.contrib.plugin.javascript.scanner.listener.FqnCreator;
 import org.junit.Test;
 
 public class TestFqnCreator {

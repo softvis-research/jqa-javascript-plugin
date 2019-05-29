@@ -1,12 +1,11 @@
 package org.jqassistant.contrib.plugin.javascript.api.model;
 
+import java.util.List;
+
 import com.buschmais.jqassistant.core.store.api.model.FullQualifiedNameDescriptor;
 import com.buschmais.xo.neo4j.api.annotation.Label;
-import com.buschmais.xo.neo4j.api.annotation.Property;
 import com.buschmais.xo.neo4j.api.annotation.Relation;
 import com.buschmais.xo.neo4j.api.annotation.Relation.Incoming;
-
-import java.util.List;
 
 /**
  * Interface to describe a named or anonymous function.
@@ -14,16 +13,7 @@ import java.util.List;
  * @author sh20xyqi
  */
 @Label(value = "Function", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
-public interface FunctionDescriptor extends JsDescriptor, FullQualifiedNameDescriptor, CodeArtifact {
-    
-	/**
-     * Returns the name of the function.
-     *
-     * @return The name.
-     */
-	@Property("name")
-    String getName();
-    void setName(String name);
+public interface FunctionDescriptor extends CodeArtifact {
     
     /**
      * Returns all declared {@link FunctionParameterDescriptor} of this function.

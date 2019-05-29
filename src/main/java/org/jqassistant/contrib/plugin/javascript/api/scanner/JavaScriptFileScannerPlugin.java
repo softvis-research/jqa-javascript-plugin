@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.JsSourceParser;
+import org.jqassistant.contrib.plugin.javascript.api.model.JavaScriptFileDescriptor;
+import org.jqassistant.contrib.plugin.javascript.scanner.JavaScriptSourceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,9 +29,9 @@ import com.buschmais.jqassistant.plugin.common.api.scanner.filesystem.FileResour
  * @author sh20xyqi
  */
 @ScannerPlugin.Requires(FileDescriptor.class)
-public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsFileDescriptor> {
+public class JavaScriptFileScannerPlugin extends AbstractScannerPlugin<FileResource, JavaScriptFileDescriptor> {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsFileScannerPlugin.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaScriptFileScannerPlugin.class);
     
     public static final String JQASSISTANT_PLUGIN_JS_SUFFIXES = "jqassistant.plugin.js.suffixes";
 
@@ -63,18 +63,18 @@ public class JsFileScannerPlugin extends AbstractScannerPlugin<FileResource, JsF
     }
 
     /**
-     * Function that calls the Visitor to scan the transferred, checked file.
+     * Function that calls the Listener to scan the transferred, checked file.
      * @param item The passed file.
-     * @param path The absolkute path to the file.
+     * @param path The absolute path to the file.
      * @param scope The passed lexical scope of the passed file.
      * @param scanner The passed scanner which shall be used to scan the file.
      * @return jsFileDescriptor The used file descriptor.
      * @throws IOException 
      */
     @Override
-    public JsFileDescriptor scan(final FileResource item, final String path, final Scope scope, final Scanner scanner) throws IOException {
+    public JavaScriptFileDescriptor scan(final FileResource item, final String path, final Scope scope, final Scanner scanner) throws IOException {
         final Store store = scanner.getContext().getStore();
-        final JsSourceParser sourceParser = new JsSourceParser (store);
+        final JavaScriptSourceParser sourceParser = new JavaScriptSourceParser (store);
         return sourceParser.parseFile(item);
     }
 

@@ -5,7 +5,7 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
 /**
- * Interface for describing all passed parameters of a function.
+ * Interface for describing all passed parameters of a function. Parameters are still special variables.
  * 
  * @author sh20xyqi
  */

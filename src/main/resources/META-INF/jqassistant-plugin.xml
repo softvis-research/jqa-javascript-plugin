@@ -2,20 +2,20 @@
         xmlns:jqa-plugin="http://www.buschmais.com/jqassistant/core/plugin/schema/v1.0" name="JS">
 <description>Provides a scanner for Javascript files.</description>
     <model>
-    	<class>org.jqassistant.contrib.plugin.javascript.api.model.JsDescriptor</class>
+    	<class>org.jqassistant.contrib.plugin.javascript.api.model.JavaScriptDescriptor</class>
     
         <class>org.jqassistant.contrib.plugin.javascript.api.model.CodeArtifact</class>
     	<class>org.jqassistant.contrib.plugin.javascript.api.model.ArrayDescriptor</class>
 		<class>org.jqassistant.contrib.plugin.javascript.api.model.ObjectDescriptor</class>
     	<class>org.jqassistant.contrib.plugin.javascript.api.model.InvokesDescriptor</class>
     
-        <class>org.jqassistant.contrib.plugin.javascript.api.model.JsFileDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.JavaScriptFileDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.VariableDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.FunctionDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.FunctionParameterDescriptor</class>
 
 		
-        <class>org.jqassistant.contrib.plugin.javascript.api.model.LiteralDescriptor</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.model.PrimitiveDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.NullDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.StringDescriptor</class>
         <class>org.jqassistant.contrib.plugin.javascript.api.model.NumberDescriptor</class>
@@ -26,6 +26,6 @@
 
     </model>
     <scanner>
-        <class>org.jqassistant.contrib.plugin.javascript.api.scanner.JsFileScannerPlugin</class>
+        <class>org.jqassistant.contrib.plugin.javascript.api.scanner.JavaScriptFileScannerPlugin</class>
     </scanner>
 </jqa-plugin:jqassistant-plugin>

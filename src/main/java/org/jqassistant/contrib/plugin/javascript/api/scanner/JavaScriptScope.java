@@ -7,7 +7,7 @@ import com.buschmais.jqassistant.core.scanner.api.Scope;
  * 
  * @author sh20xyqi
  */
-public enum JsScope implements Scope {
+public enum JavaScriptScope implements Scope {
     SRC;
 
     @Override

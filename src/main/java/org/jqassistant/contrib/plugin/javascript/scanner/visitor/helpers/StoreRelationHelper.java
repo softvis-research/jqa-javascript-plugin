@@ -1,4 +1,4 @@
-package org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators;
+package org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 
@@ -11,11 +11,11 @@ import com.buschmais.jqassistant.core.store.api.model.Descriptor;
  * @author sh20xyqi
  */
 
-public abstract class StoreRelationManipulator <T extends Descriptor, S extends ParserRuleContext, L extends Descriptor, R extends Descriptor> {
+public abstract class StoreRelationHelper <T extends Descriptor, S extends ParserRuleContext, L extends Descriptor, R extends Descriptor> {
 
 	protected Store store;
 	
-	public StoreRelationManipulator(Store store) {
+	public StoreRelationHelper(Store store) {
 		super();
 		this.store = store;
 	}

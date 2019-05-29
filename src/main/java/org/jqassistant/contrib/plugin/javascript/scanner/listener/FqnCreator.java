@@ -1,8 +1,16 @@
-package org.jqassistant.contrib.plugin.javascript.scanner.visitor;
+package org.jqassistant.contrib.plugin.javascript.scanner.listener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.jqassistant.contrib.plugin.javascript.api.model.PrimitiveDescriptor;
+
+/**
+ * 
+ * The FQNCreator creates a unique name for each node depending on all its superordinate nodes. Its separator is the colon.
+ * @author sh20xyqi
+ */
 
 public class FqnCreator {
 
@@ -13,6 +21,15 @@ public class FqnCreator {
 	public FqnCreator(String fqnBase) {
 		super();
 		this.fqnBase = fqnBase;
+	}
+	
+	public FqnCreator advanceFqnWith(String artifactName) {
+		String base = createFqn(artifactName);
+		return new FqnCreator(base);
+	}
+	
+	public String getFqnBase() {
+		return fqnBase;
 	}
 	
 	public String createFQNFor(String artifactName){

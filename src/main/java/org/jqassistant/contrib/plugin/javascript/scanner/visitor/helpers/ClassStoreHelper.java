@@ -1,9 +1,8 @@
-package org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators;
+package org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers;
 
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.jqassistant.contrib.plugin.javascript.JavaScriptParser.ClassDeclarationContext;
 import org.jqassistant.contrib.plugin.javascript.api.model.ClassDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
+import org.jqassistant.contrib.plugin.javascript.parser.JavaScriptParser.ClassDeclarationContext;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 
@@ -13,13 +12,12 @@ import com.buschmais.jqassistant.core.store.api.Store;
  * @author sh20xyqi
  */
 
-public class ClassStoreManipulator implements NodeStoreManipulator<ClassDescriptor, ClassDeclarationContext> {
+public class ClassStoreHelper implements NodeStoreHelper<ClassDescriptor, ClassDeclarationContext> {
 
 	@Override
-	public ClassDescriptor createNodeIn(Store store, ClassDeclarationContext ctx, FqnCreator fqnCreator) {
+	public ClassDescriptor createNodeIn(Store store, ClassDeclarationContext ctx) {
 		ClassDescriptor ecmaClass = store.create(ClassDescriptor.class);
 		String className = ctx.children.get(1).getText();
-		ecmaClass.setFullQualifiedName(fqnCreator.createFqn(className));
 		ecmaClass.setName(className);
 		ecmaClass.setLine(ctx.getStart().getLine());
 		ParseTree classBody = ctx.children.get(2);

@@ -1,6 +1,6 @@
-package org.jqassistant.contrib.plugin.javascript;
+package org.jqassistant.contrib.plugin.javascript.parser;
 import org.antlr.v4.runtime.*;
-import org.jqassistant.contrib.plugin.javascript.JavaScriptParser;
+import org.jqassistant.contrib.plugin.javascript.parser.JavaScriptParser;
 
 /**
  * All parser methods that used in grammar (p, prev, notLineTerminator, etc.)

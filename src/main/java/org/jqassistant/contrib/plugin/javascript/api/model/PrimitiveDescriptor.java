@@ -10,11 +10,11 @@ import com.buschmais.xo.neo4j.api.annotation.Property;
  * @author sh20xyqi
  */
 
-@Label(value = "Literal")
-public interface LiteralDescriptor <T> extends JsDescriptor, FullQualifiedNameDescriptor, LineNumberDescriptor {
+@Label(value = "Value")
+public interface PrimitiveDescriptor <T> extends JavaScriptDescriptor, FullQualifiedNameDescriptor, LineNumberDescriptor {
 	
 	/**
-	 * A literal can have a single value which is assigned to it.
+	 * A primitive can have a single value which is assigned to it.
 	 * 
 	 * @return Returns the value of the literal.
 	 */

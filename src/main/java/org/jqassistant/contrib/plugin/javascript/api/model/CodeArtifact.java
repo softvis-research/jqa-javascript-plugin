@@ -8,15 +8,16 @@ import com.buschmais.xo.neo4j.api.annotation.Relation;
 import com.buschmais.xo.neo4j.api.annotation.Relation.Outgoing;
 
 /**
- * Interface to describe a JavaScript code artifact.
+ * Interface to describe a JavaScript code artifact: file, class, function or variable. Is not mentioned as a label in neo4j.
  * 
  * @author sh20xyqi
  */
 
-@Label("JavaScriptCode")
-public interface CodeArtifact extends FullQualifiedNameDescriptor, LineNumberDescriptor {
+@Label("")
+public interface CodeArtifact extends FullQualifiedNameDescriptor, LineNumberDescriptor, JavaScriptDescriptor {
 
 	public static final String DECLARES = "DECLARES";
+	public static final String HAS = "HAS";
 
 	@Outgoing
 	List<InvokesDescriptor> getInvokes();
@@ -36,13 +37,6 @@ public interface CodeArtifact extends FullQualifiedNameDescriptor, LineNumberDes
     List<ClassDescriptor> getClasses();
     
     /**
-     * Contains all named and anonymous {@link BaseObjectDescriptor} (e.g. {@link ObjectDescriptor} or {@link ArrayDescriptor}) that occur in this JavaScript code artifact.
-     * @return List of objects 
-     */
-    @Relation(DECLARES)
-    List<BaseObjectDescriptor> getObjects();
-    
-    /**
      * Contains all named and anonymous {@link VariableDescriptor} that occur in this JavaScript code artifact.
      * @return List of variables
      */
@@ -50,9 +44,10 @@ public interface CodeArtifact extends FullQualifiedNameDescriptor, LineNumberDes
     List<VariableDescriptor> getVariables();
     
     /**
-     * Contains all named and anonymous {@link LiteralDescriptor} (also called primitive data types) that occur in this JavaScript code artifact.
-     * @return List of literals (primitive data types)
+     * Contains all named and anonymous {@link ComplexDescriptor} (e.g. {@link ObjectDescriptor} or {@link ArrayDescriptor}) that occur in this JavaScript code artifact.
+     * @return List of objects 
      */
-    @Relation(DECLARES)
-    List<LiteralDescriptor<?>> getLiterals();
+    @Relation(HAS)
+    List<ComplexDescriptor> getObjects();
+    
 }

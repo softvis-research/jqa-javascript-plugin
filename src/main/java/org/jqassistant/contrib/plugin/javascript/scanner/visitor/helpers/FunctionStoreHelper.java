@@ -1,8 +1,9 @@
-package org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators;
+package org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers;
+
+import java.util.Optional;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.jqassistant.contrib.plugin.javascript.api.model.FunctionDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 
@@ -12,24 +13,26 @@ import com.buschmais.jqassistant.core.store.api.Store;
  * @author sh20xyqi
  */
 
-public class FunctionStoreManipulator implements NodeStoreManipulator<FunctionDescriptor, ParserRuleContext> {
+public class FunctionStoreHelper implements NodeStoreHelper<FunctionDescriptor, ParserRuleContext> {
 
 	public static final String FUNC_ANONYMOUS_NAME = "<anonymous>";
+	public static final String CONSTRUCTOR = "constructor";
 	private String functionName;
 	
-	public FunctionStoreManipulator(String functionName) {
+	public FunctionStoreHelper(String functionName) {
 		this.functionName = functionName;
 	}
 	
-	public FunctionStoreManipulator() {
-		this(FUNC_ANONYMOUS_NAME);
+	public FunctionStoreHelper(Optional<String> s) {
+		this(s.orElse(FUNC_ANONYMOUS_NAME));
 	}
 	
+	
+	
 	@Override
-	public FunctionDescriptor createNodeIn(Store store, ParserRuleContext ctx, FqnCreator fqnCreator) {
+	public FunctionDescriptor createNodeIn(Store store, ParserRuleContext ctx) {
 		FunctionDescriptor ecmaFunc = store.create(FunctionDescriptor.class);
 		ecmaFunc.setName(functionName);
-		ecmaFunc.setFullQualifiedName(fqnCreator.createFqn(functionName));
 		int line = ctx.start.getLine();
 		ecmaFunc.setLine(line);
 		return ecmaFunc;

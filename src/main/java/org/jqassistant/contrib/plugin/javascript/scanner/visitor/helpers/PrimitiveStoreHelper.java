@@ -1,33 +1,32 @@
-package org.jqassistant.contrib.plugin.javascript.scanner.visitor.manipulators;
+package org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers;
 
 import java.util.Optional;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNodeImpl;
-import org.jqassistant.contrib.plugin.javascript.JavaScriptParser.LiteralContext;
-import org.jqassistant.contrib.plugin.javascript.JavaScriptParser.NumericLiteralContext;
 import org.jqassistant.contrib.plugin.javascript.api.model.BooleanDescriptor;
-import org.jqassistant.contrib.plugin.javascript.api.model.LiteralDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.NullDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.NumberDescriptor;
+import org.jqassistant.contrib.plugin.javascript.api.model.PrimitiveDescriptor;
 import org.jqassistant.contrib.plugin.javascript.api.model.StringDescriptor;
-import org.jqassistant.contrib.plugin.javascript.scanner.visitor.FqnCreator;
+import org.jqassistant.contrib.plugin.javascript.parser.JavaScriptParser.LiteralContext;
+import org.jqassistant.contrib.plugin.javascript.parser.JavaScriptParser.NumericLiteralContext;
 
 import com.buschmais.jqassistant.core.store.api.Store;
 
 /**
- * Manipulator for the {@link LiteralDescriptor} to prepare the interaction with the store for this type of descriptor.
+ * Manipulator for the {@link PrimitiveDescriptor} to prepare the interaction with the store for this type of descriptor.
  * 
  * @author sh20xyqi
  */
 
-public class LiteralStoreManipulator implements NodeStoreManipulator<LiteralDescriptor<?>, LiteralContext> {
+public class PrimitiveStoreHelper implements NodeStoreHelper<PrimitiveDescriptor<?>, LiteralContext> {
 
 	@Override
-	public LiteralDescriptor<?> createNodeIn(Store store, LiteralContext ctx, FqnCreator fqnCreator) {
+	public PrimitiveDescriptor<?> createNodeIn(Store store, LiteralContext ctx) {
 		ParseTree literal = ctx.getChild(0);
 		String text = ctx.getText();
-		Optional<LiteralDescriptor<?>> to = Optional.empty();
+		Optional<PrimitiveDescriptor<?>> to = Optional.empty();
 		if (literal instanceof NumericLiteralContext) {
 			NumberDescriptor number = store.create(NumberDescriptor.class);
 			number.setValue(Double.parseDouble(text));
@@ -35,7 +34,7 @@ public class LiteralStoreManipulator implements NodeStoreManipulator<LiteralDesc
 		} else if (literal instanceof TerminalNodeImpl) {
 			if ("true".equals(text)) {
 				BooleanDescriptor t = store.create(BooleanDescriptor.class);
-				t.setValue(false);
+				t.setValue(true);
 				to = Optional.of(t);
 			} else if ("false".equals(text)) {
 				BooleanDescriptor f = store.create(BooleanDescriptor.class);

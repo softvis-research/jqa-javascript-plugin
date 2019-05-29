@@ -4,26 +4,18 @@ import com.buschmais.xo.neo4j.api.annotation.Label;
 import com.buschmais.xo.neo4j.api.annotation.Property;
 
 /**
- * Interface for describing a class.
+ * Interface for describing a javascript class.
  * 
  * @author sh20xyqi
  */
 @Label(value = "Class", usingIndexedPropertyOf = FullQualifiedNameDescriptor.class)
-public interface ClassDescriptor extends JsDescriptor, CodeArtifact, FullQualifiedNameDescriptor {
-    
-	/**
-     * Returns the name of the class.
-     * @return String 
-     */
-	@Property("NAME")
-    String getName();
-    void setName(String name);
+public interface ClassDescriptor extends CodeArtifact {
     
     /**
-     * Returns the super class of the class.
+     * Binds the parent class.
      * @return String
      */
-    @Property("EXTENDS")
+    @Property("extends")
     String getSuperClass();
     void setSuperClass(String superClass);
 

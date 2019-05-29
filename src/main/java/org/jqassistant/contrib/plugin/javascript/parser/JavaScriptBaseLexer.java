@@ -1,6 +1,6 @@
-package org.jqassistant.contrib.plugin.javascript;
+package org.jqassistant.contrib.plugin.javascript.parser;
 import org.antlr.v4.runtime.*;
-import org.jqassistant.contrib.plugin.javascript.JavaScriptLexer;
+import org.jqassistant.contrib.plugin.javascript.parser.JavaScriptLexer;
 
 import java.util.Stack;
 
