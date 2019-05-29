@@ -1,6 +1,11 @@
-target/
-*.class 
-.project
-.settings
-.classpath
+target
+/.idea
+*.iml
+*.ipr
+*~
+*.log
 .DS_Store
+
+/.project
+/.classpath
+.settings/*
