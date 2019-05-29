@@ -1,7 +1,7 @@
 # jQAssistant JavaScript Source Parser Plugin #
 
 [![GitHub license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/softvis-research/jqa-githubissues-plugin/blob/master/LICENSE)
-[![Build Status](https://travis-ci.com/softvis-research/jqa-javascript-plugin.svg?branch=development)](https://travis-ci.com/softvis-research/jqa-javascript-plugin)
+[![Build Status](https://api.travis-ci.com/softvis-research/jqa-javascript-plugin.svg?branch=development)](https://travis-ci.com/softvis-research/jqa-javascript-plugin)
 [![codecov](https://codecov.io/gh/softvis-research/jqa-javascript-plugin/branch/development/graph/badge.svg)](https://codecov.io/gh/softvis-research/jqa-javascript-plugin)
 
 
