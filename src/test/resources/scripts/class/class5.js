@@ -2,7 +2,7 @@
     Classes with polymorphism (extends)
  */
 
-class Tier{
+class Tier {
     constructor(name) {
         this.name = name;
     }

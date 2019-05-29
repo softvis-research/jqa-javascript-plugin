@@ -2,7 +2,7 @@
     Class with methods (prototype)
  */
 
-class Polygon extends Object {
+class Polygon {
     
     constructor(hoehe, breite) {
         this.hoehe = hoehe;

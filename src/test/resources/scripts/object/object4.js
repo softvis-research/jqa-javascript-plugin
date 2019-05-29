@@ -6,3 +6,4 @@ var person = {
 };
 
 var firstName = person[firstName];
+var anotherFirstName = person.firstName;

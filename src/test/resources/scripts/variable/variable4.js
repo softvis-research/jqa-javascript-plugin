@@ -1,4 +1,4 @@
-function fac(n){
+function fac(n = 0){
   if(n == 0){
   	return 1;
   } else {
@@ -6,14 +6,16 @@ function fac(n){
   }
 }
 
+var myVar = 3.2
+
 console.log(fac(5));
 
 var a = function(){
     var ret = "das ist eine anonyme Funktion die gleich ausgeführt wird";
-    return ret
+    return () => 1
 }()
 
-var b = (() => "das ist das gleiche nur mit einer Arrow Function")()
+var b = (() => function(){return "das ist das gleiche nur mit einer Arrow Function"})()
 
 JSON.parse("{a : 1}")
 
@@ -33,6 +35,10 @@ class Rectangle {
     }
 }
 
-const square = new Rectangle(10, 10);
+const square = new Rectangle(110, 0);
 
 console.log(square.calcArea()); // 100
+
+console.log((JSON.parse("1")); // 1
+
+console.log((JSON.parse("'123'")); // 123

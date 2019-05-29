@@ -1,3 +1,7 @@
+/*
+    Creates function within a function.
+*/
+
 function pow(base, exp) {
     
     var ret = base;

@@ -1,5 +1,9 @@
+/*
+    Function to express the fully qualified name based difference of a global and local scope in the model.
+*/
 function localScope(){
-    var x = 5;
+    var x = "Local Scope";
     return NULL
+
 }
-var x = "FileScope";
+var x = "Global scope";

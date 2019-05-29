@@ -1,6 +1,10 @@
+var array =[1,2,3]
+
+var inc = (x) => x + 1
+
 var complex = {
     
-    ar: [(x) => x, function(){return 1;}, (y) => y + 1],
+    arrayWithOperations: [(x) => x, function(){return 1;}, (y) => y + 1,  2],
     nested: {
         f: function fac(n){
             if(n == 0)

@@ -1,2 +1,2 @@
 var car = "Fiat";
-var vars = ["Saab", "Volvo", car];
+var cars = ["Saab", "Volvo", car];
