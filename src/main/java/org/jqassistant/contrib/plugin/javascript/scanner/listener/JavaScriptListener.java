@@ -6,6 +6,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -47,6 +48,7 @@ import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.Invokes
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.ObjectStoreHelper;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.ParameterStoreHelper;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.PrimitiveStoreHelper;
+import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.StreamHelper;
 import org.jqassistant.contrib.plugin.javascript.scanner.visitor.helpers.VariableStoreHelper;
 
 import com.buschmais.jqassistant.core.store.api.Store;
@@ -172,30 +174,6 @@ public class JavaScriptListener extends JavaScriptParserBaseListener {
 		artifactStack.pop();
 	}
 	
-	private FunctionDescriptor getLastDefinedFunction() {
-		// https://stackoverflow.com/questions/24010109/java-8-stream-reverse-order
-		ListIterator<JavaScriptDescriptor> listIterator = artifacts.listIterator(artifacts.size());
-		return Stream.generate(listIterator::previous)
-			      .limit(artifacts.size())
-			      .filter((e) -> e instanceof FunctionDescriptor)
-			      .map((e) -> (FunctionDescriptor)e)
-			      .findFirst()
-			      .orElseThrow();
-		
-			      
-	}
-	
-	private Long countLastParameters() {
-		// https://stackoverflow.com/questions/24010109/java-8-stream-reverse-order
-		ListIterator<JavaScriptDescriptor> listIterator = artifacts.listIterator(artifacts.size());
-		return Stream.generate(listIterator::previous)
-			      .limit(artifacts.size())
-			      .takeWhile((desc) -> desc instanceof FunctionParameterDescriptor) // JAVA 9
-			      .collect(Collectors.counting());
-		
-			      
-	}
-	
 	@Override
 	public void enterFormalParameterArg(FormalParameterArgContext ctx) {
 		int countParamtersBefore = countLastParameters().intValue();
@@ -204,6 +182,29 @@ public class JavaScriptListener extends JavaScriptParserBaseListener {
 		setQualifiedName(function, ecmaParam, ecmaParam.getName());
 		amendStack(ecmaParam);
 		function.getParameters().add(ecmaParam);
+	}
+	
+	private Long countLastParameters() {
+		// https://stackoverflow.com/questions/24010109/java-8-stream-reverse-order
+		ListIterator<JavaScriptDescriptor> listIterator = artifacts.listIterator(artifacts.size());
+		Stream<JavaScriptDescriptor> reverseParamterStream = Stream.generate(listIterator::previous).limit(artifacts.size());
+		return StreamHelper.takeWhile(reverseParamterStream, (desc) -> desc instanceof FunctionParameterDescriptor)
+						   .collect(Collectors.counting());
+		
+		
+	}
+	
+	private FunctionDescriptor getLastDefinedFunction() {
+		// https://stackoverflow.com/questions/24010109/java-8-stream-reverse-order
+		ListIterator<JavaScriptDescriptor> listIterator = artifacts.listIterator(artifacts.size());
+		return Stream.generate(listIterator::previous)
+				.limit(artifacts.size())
+				.filter((e) -> e instanceof FunctionDescriptor)
+				.map((e) -> (FunctionDescriptor)e)
+				.findFirst()
+				.orElseThrow(() -> new NoSuchElementException("the last function wasn't found")); // Function not found shoudn't be happening
+		
+		
 	}
 	
 	@Override
