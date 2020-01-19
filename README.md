@@ -1,27 +1,36 @@
-# jQAssistant JavaScript Source Parser Plugin #
+# jQAssistant JavaScript Plugin
 
 [![GitHub license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/softvis-research/jqa-githubissues-plugin/blob/master/LICENSE)
 [![Build Status](https://api.travis-ci.com/softvis-research/jqa-javascript-plugin.svg?branch=development)](https://travis-ci.com/softvis-research/jqa-javascript-plugin)
 [![codecov](https://codecov.io/gh/softvis-research/jqa-javascript-plugin/branch/development/graph/badge.svg)](https://codecov.io/gh/softvis-research/jqa-javascript-plugin)
 
-
-This is a JavaScript parser for [jQAssistant](https://www.jqassistant.org). It enables jQAssistant to scan and to analyze [JavaScript](https://www.ecma-international.org/ecma-262/9.0/index.html#Title) files.
+This is a JavaScript parser for [jQAssistant](https://jqassistant.org/). 
+It enables jQAssistant to scan and to analyze JavaScript file.
 
 ## Getting Started
-### Standalone 
-Download [jQAssistant](https://jqassistant.org/get-started/) for command line usage. To build the project create a new maven run configuration for the project with the goals ```clean install```. You can find the resulting jar file in the target folder of the project. Then run:
+
+Download the jQAssistant command line tool for your system: [jQAssistant - Get Started](https://jqassistant.org/get-started/).
+
+Next download the latest version from the release tab. Put the `jqassistant-javascript-plugin-*.jar` into the plugins folder of the jQAssistant command
+ line tool.
+ 
+Now scan your code and wait for the plugin to finish:
 
 ```bash
-# Scan the GitHub-Repositories
-jqassistant-commandline-neo4jv3-1.4.0/bin/jqassistant.sh scan -f
-
-# Start a Neo4J web UI to explore the result: 
-jqassistant-commandline-neo4jv3-1.4.0/bin/jqassistant.sh server
+jqassistant.sh scan -f
 ```
+
+You can then start a local Neo4j server to start querying the database at [http://localhost:7474](http://localhost:7474):
+
+```bash
+jqassistant.sh server
+```
+
 
 ## Labels and relations
 
 ### Labels
+
 The JavaScript plugin uses the following labels in the resulting graph:
 
 | Label | Description                                                  |
@@ -41,7 +50,9 @@ The JavaScript plugin uses the following labels in the resulting graph:
 |```:String```|Nodes that represent JavaScript [null](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String).|
 
 ### Relations
+
 #### JavaScriptFile
+
 ```java
 (:JavaScriptFile)  -[DECLARES]    ->  (:Variable)
 (:JavaScriptFile)  -[DECLARES]    ->  (:Class)
